@@ -42,6 +42,6 @@ if (N["wrong"].AsInt == 0)                     // this will execute the if-state
  
 N["data"]["sampleArray"][-1] = "Test";         // this will add another string to the end of the array
 
-N["data"]["sampleArray"][-1]["name"] = "FooBar"; // this will add another object to the end of the array which contains a string named "name"
+N["data"]["sampleArray"][-1]["name"] = "FooBar"; // will add another object to the end of the array containing string named "name"
  
 N["data"] = "erased";                          // this will replace the object stored in data with the string "erased"
