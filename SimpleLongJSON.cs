@@ -6,7 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Collections;
-
+using System.Globalization;
 
 /* * * * *
  * A simple JSON Parser / builder
@@ -311,23 +311,22 @@ namespace SimpleLongJSON
 
         static JSONData Numberize(string token)
         {
-
             bool flag = false;
             int integer = 0;
             long longer = 0;
             double real = 0;
 
-            if (int.TryParse(token, out integer))
+            if (int.TryParse(token, NumberStyles.Integer, CultureInfo.InvariantCulture, out integer))
             {
                 return new JSONData(integer);
             }
 
-            if (Int64.TryParse(token, out longer)) {
+            if (Int64.TryParse(token, NumberStyles.Integer, CultureInfo.InvariantCulture, out longer))
+            {
                 return new JSONData(longer);
             }
-            
 
-            if (double.TryParse(token, out real))
+            if (double.TryParse(token, NumberStyles.Any, CultureInfo.InvariantCulture, out real))
             {
                 return new JSONData(real);
             }
@@ -521,7 +520,8 @@ namespace SimpleLongJSON
                                         string s = aJSON.Substring(i + 1, 4);
                                         Token += (char)int.Parse(
                                             s,
-                                            System.Globalization.NumberStyles.AllowHexSpecifier);
+                                            System.Globalization.NumberStyles.AllowHexSpecifier, 
+                                            CultureInfo.InvariantCulture);
                                         i += 4;
                                         break;
                                     }
